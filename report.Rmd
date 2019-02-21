@@ -3,22 +3,77 @@ title: "Options Homework for MFIN 820"
 author: "Refik Türkeli"
 date: "22/2/2019"
 output: pdf_document
+urlcolor: blue
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
+library(scales)
+library(kableExtra)
 source("analysis.R")
 ```
 
 For my homework, I'm selecting Tesla, Inc. as my last name starts with T.
 As of this writing, Tesla's stock price is $`r stock_price`. I have downloaded
 options prices from [Yahoo Finance](https://finance.yahoo.com/quote/TSLA/options)
-on `r time_of_data`.
+on `r time_of_data`. Option pricing data can be seen at the end of this pdf.
+The code written for generating this document can be seen [on Github](https://github.com/refik/options-mfin820).
 
 ## Q1. Confirm that higher exercise prices mean lower call prices and higher put prices.
 
-```{r}
-
+To confirm this, option prices have been filtered. Only options that have been
+traded in the last 3 hours and have a volume more than 20 are selected. 
+Options used for this analysis have a maturity of 30 days. Raw data for this plot can be observed at the end of this report.  
+  
+  
+```{r, echo = FALSE}
+strike_effect_plot
 ```
 
+\newpage
+
+## Q2. Confirm that longer maturity means higher prices for both calls and puts.
+
+To observe the effect of maturity, options with 15 days and 30 days to expiry
+are compared. As it can be seen from the plot, in all cases the slope is positive 
+for both puts and calls.
+
+```{r, echo = FALSE}
+maturity_pair %>% 
+    spread(maturity, last_price) %>% 
+    select(Type = type, Strike = strike_price, 
+           `15 days` = `15`, `30 days` = `30`) %>% 
+    kable(booktabs = TRUE, linesep = "") %>% 
+    kable_styling(latex_options = "striped", position = "center")
+```
+
+```{r, echo = FALSE}
+maturity_effect_plot
+```
+
+## Q3. Choose a put and call with the same exercise price and maturity. Confirm that the put-call parity holds
+
+Risk free 1 month treasury yield curve rate observed at the time of this report
+is `r percent(risk_free_30d)`. Stock price for Tesla, Inc. is $`r stock_price`. Put-call parity holds nearly perfectly.
+
+```{r, echo = FALSE}
+parity_data %>% 
+    select(Strike = strike_price, C = call, P = put, 
+           `PV(X)` = `pv(strike)`, `C + PV(X)` = `call + pv(strike)`,
+           `P + S` = `put + spot`, Difference = `parity_difference`) %>% 
+    kable(digits = 2, booktabs = TRUE, linesep = "") %>% 
+    kable_styling(latex_options = "striped", position = "center")
+```
+
+\newpage
+
+## Appendix: Data
+
+```{r, echo = FALSE}
+options %>% 
+    select(Type = type, Maturity = maturity,
+           `Strike Price` = strike_price, `Last Price` = last_price) %>% 
+    kable(booktabs = TRUE, longtable = TRUE, linesep = "") %>% 
+    kable_styling(latex_options = c("repeat_header", "striped"), position = "center")
+```

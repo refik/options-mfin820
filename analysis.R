@@ -49,7 +49,7 @@ maturity_pair <- options %>%
     mutate(maturity = as.integer(maturity))
 
 maturity_effect_plot <- ggplot(data = maturity_pair, 
-                               aes(x = maturity, y = last_price, 
+                               aes(x = as.character(maturity), y = last_price, 
                                    group = paste(type, strike_price))) +
     geom_line() +
     geom_point(aes(color = type), size = 2) +
