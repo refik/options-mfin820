@@ -1,0 +1,24 @@
+---
+title: "Options Homework for MFIN 820"
+author: "Refik Türkeli"
+date: "22/2/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+source("analysis.R")
+```
+
+For my homework, I'm selecting Tesla, Inc. as my last name starts with T.
+As of this writing, Tesla's stock price is $`r stock_price`. I have downloaded
+options prices from [Yahoo Finance](https://finance.yahoo.com/quote/TSLA/options)
+on `r time_of_data`.
+
+## Q1. Confirm that higher exercise prices mean lower call prices and higher put prices.
+
+```{r}
+
+```
+
