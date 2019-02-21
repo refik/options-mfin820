@@ -26,7 +26,12 @@ The code written for generating this document can be seen
 
 To confirm this, option prices have been filtered. Only options that have been
 traded in the last 3 hours and have a volume more than 20 are selected. 
-Options used for this analysis have a maturity of 30 days. Data for this plot can be observed at the end of this report.  
+Options used for this analysis have a maturity of 30 days. Data for this plot 
+can be observed at the end of this report.  
+  
+The point where last prices of put and call options meet is the strike price
+that is equal to the stock price. At that point option premium is all time value
+and it is the maximum amount time value can become.
   
   
 ```{r, echo = FALSE}
@@ -38,8 +43,8 @@ strike_effect_plot
 ## Q2. Confirm that longer maturity means higher prices for both calls and puts.
 
 To observe the effect of maturity, options with 15 days and 30 days to expiry
-are compared. As it can be seen from the plot, in all cases the slope is positive 
-for both puts and calls.
+are compared. As it can be seen from the plot, in all cases the slopes are positive 
+for both puts and calls. Maturity increases the premium.
 
 ```{r, echo = FALSE}
 maturity_pair %>% 
@@ -57,7 +62,9 @@ maturity_effect_plot
 ## Q3. Choose a put and call with the same exercise price and maturity. Confirm that the put-call parity holds
 
 Risk free 1 month treasury yield curve rate observed at the time of this report
-is `r percent(risk_free_30d)`. Stock price for Tesla, Inc. is $`r stock_price`. Put-call parity holds nearly perfectly.
+is `r percent(risk_free_30d)`. Stock price for Tesla, Inc. is $`r stock_price`. 
+Only options with 30 days to maturity are taken into account. 
+Put-call parity holds nearly perfectly.
 
 ```{r, echo = FALSE}
 parity_data %>% 

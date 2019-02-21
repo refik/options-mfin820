@@ -38,6 +38,8 @@ options <- bind_rows(
 
 strike_effect_plot <- ggplot(data = filter(options, maturity == 30)) +
     geom_line(aes(x = strike_price, y = last_price, color = type), size = 2) +
+    geom_vline(xintercept = stock_price) +
+    annotate("text", x = stock_price, y = 40, label = "Stock Price", hjust = -0.1) +
     labs(x = "Strike Price", y = "Last Price", color = "Type of Option") +
     ggtitle("Effect of Strike Price on Call and Put Premiums")
 
