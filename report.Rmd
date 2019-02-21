@@ -17,14 +17,16 @@ source("analysis.R")
 For my homework, I'm selecting Tesla, Inc. as my last name starts with T.
 As of this writing, Tesla's stock price is $`r stock_price`. I have downloaded
 options prices from [Yahoo Finance](https://finance.yahoo.com/quote/TSLA/options)
-on `r time_of_data`. Option pricing data can be seen at the end of this pdf.
-The code written for generating this document can be seen [on Github](https://github.com/refik/options-mfin820).
+on `r time_of_data`. Raw data can be observed 
+[here](https://github.com/refik/options-mfin820/blob/master/options-data.R).
+The code written for generating this document can be seen 
+[on Github](https://github.com/refik/options-mfin820).
 
 ## Q1. Confirm that higher exercise prices mean lower call prices and higher put prices.
 
 To confirm this, option prices have been filtered. Only options that have been
 traded in the last 3 hours and have a volume more than 20 are selected. 
-Options used for this analysis have a maturity of 30 days. Raw data for this plot can be observed at the end of this report.  
+Options used for this analysis have a maturity of 30 days. Data for this plot can be observed at the end of this report.  
   
   
 ```{r, echo = FALSE}
